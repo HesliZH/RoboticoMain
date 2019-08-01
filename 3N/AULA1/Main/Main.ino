@@ -13,17 +13,17 @@ void loop() {
   digitalWrite(12, HIGH);
   digitalWrite(11, LOW);
   digitalWrite(10, LOW);
-  delay(1000);
+  delay(100);
   digitalWrite(13, LOW);
   digitalWrite(12, LOW);
   digitalWrite(11, HIGH);
   digitalWrite(10, LOW);
-  delay(1000);
+  delay(100);
   digitalWrite(13, HIGH);
   digitalWrite(12, HIGH);
   digitalWrite(11, HIGH);
   digitalWrite(10, HIGH);
-  delay(1000);
+  delay(100);
   //Serial.println(variavel);
   //variavel++;
 }
