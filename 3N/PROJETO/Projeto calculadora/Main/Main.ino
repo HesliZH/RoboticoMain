@@ -47,6 +47,7 @@ void loop(){
     /*Inicia as funções de calculo
         variavel key recebe o valor digitado no teclado
     */
+    
     char key = keypad.getKey();
     if (key=='0'||key=='1'||key=='2'||key=='3'||key=='4'||key=='5'||key=='6'||key=='7'||key=='8'||key=='9'){
         //Mostra na tela os valores a serem calculados
@@ -54,8 +55,8 @@ void loop(){
             lcd.print(key);
             LeituraTeclado1+=key;
             numero1=LeituraTeclado1.toInt();
+            
         }
-        
         else if(Conta==1){
             lcd.print(key);
             LeituraTeclado2+=key;
@@ -64,8 +65,14 @@ void loop(){
     
     }
 
+    if(key=='='&&numero1==123){
+              //jogo
+        lcd.clear();
+        lcd.setCursor(0,0);
+        lcd.print("Deu boa");
+    }
     //Reinicia a tela
-    if(key=='A'){
+    else if(key=='A'){
         LeituraTeclado2="";
         LeituraTeclado1="";
         numero1=0;
@@ -108,6 +115,7 @@ void loop(){
         resultado2=(numero3/numero4);
         lcd.print(resultado2);
     }
+    
     else if((key=='+'||key=='-'||key=='*'||key=='/')&&(Conta==0)){
         Conta++;
         a=key;
