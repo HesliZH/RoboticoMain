@@ -5,9 +5,17 @@
 
 */ 
 
+
+
 //Bibliotecas obrigatórias
 #include <LiquidCrystal.h>
 #include <Keypad.h>
+
+//Global Scope
+
+int num1, num2, result, resposta;
+int acertou = 1;
+
 
 //Constantes com total de colunas e linhas do teclado
 const byte Filas = 4; 
@@ -40,7 +48,19 @@ long numero1,numero2,resultado1;
 double numero3,numero4,resultado2;
 
 void setup(){
+    LeituraTeclado2="";
+        LeituraTeclado1="";
+        numero1=0;
+        numero2=0;
+        numero3=0;
+        numero4=0;
+        Conta=0;
+        resultado1=0;
+        resultado2=0;
     lcd.begin(16,2); 
+    lcd.clear();
+    
+    loop();
 }
 
 void loop(){
@@ -66,10 +86,7 @@ void loop(){
     }
 
     if(key=='='&&numero1==123){
-              //jogo
-        lcd.clear();
-        lcd.setCursor(0,0);
-        lcd.print("Deu boa");
+        jogo();
     }
     //Reinicia a tela
     else if(key=='A'){
@@ -121,4 +138,50 @@ void loop(){
         a=key;
         lcd.print(a);
     }
+}
+
+String valorLido(){
+    String valorDigitado = "";
+    char teclaPressionada = keypad.getKey();  
+
+    while(teclaPressionada != '='){
+          teclaPressionada = keypad.getKey();
+          if((teclaPressionada != NO_KEY) && (teclaPressionada != '=')){
+              valorDigitado.concat(teclaPressionada);
+              lcd.print(teclaPressionada);
+          }
+      }
+   return (valorDigitado);
+}
+
+void jogo(){
+    acertou = 1;
+   while(acertou == 1){
+            num1 = random(2, 11);
+            num2 = random(2, 11);
+            lcd.clear();
+            int result = num1 * num2;
+            lcd.setCursor(0,0);
+            lcd.print(String(num1) + " X " + String(num2) + " = ");
+            lcd.setCursor(0, 2);
+            lcd.print("R: ");
+            resposta = valorLido().toInt();
+     
+    
+            if(result == resposta){
+                  lcd.clear();
+                  lcd.setCursor(0, 0);            
+                  lcd.print("Voce acertou");
+                  acertou = 1;
+                  delay(3000);
+              }else{
+                  lcd.clear();
+                  lcd.setCursor(0, 0);            
+                  lcd.print("Errrooou");
+                  acertou = 0;
+                  numero1 = 0;
+                  delay(3000);
+                }
+        }
+     setup();
 }
